@@ -1,0 +1,71 @@
+# =========================
+# Node / NPM
+# =========================
+node_modules/
+**/node_modules/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Build outputs
+# =========================
+dist/
+**/dist/
+build/
+**/build/
+
+# =========================
+# TypeScript
+# =========================
+*.tsbuildinfo
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Sequelize
+# =========================
+# (Keep migrations & seeders tracked)
+# No ignore needed for migrations/
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# Vite
+# =========================
+.vite/
+
+# =========================
+# Coverage / Testing
+# =========================
+coverage/
+
+# =========================
+# Cache
+# =========================
+.cache/
