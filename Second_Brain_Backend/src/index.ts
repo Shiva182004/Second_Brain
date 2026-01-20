@@ -7,9 +7,18 @@ import { UniqueConstraintError } from "sequelize";
 import { userMiddleware } from "./middleware/userMiddleware.js";
 import { Content } from "./models/content.js";
 import crypto from "crypto";
+import cors from "cors";
+
+import cookieParser from "cookie-parser";
+
 
 const app = express();
+app.use(cookieParser());
 app.use(express.json());
+app.use(cors({
+    origin: "http://localhost:5173", // EXACT frontend URL
+    credentials: true
+}));
 const JWT_SECRET = "sdfjdslkfjdskfjdsklfjds";
 
 const signupSchema = z.object({
@@ -117,7 +126,7 @@ app.post("/api/v1/signin", async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: true,
+            secure: false,
             sameSite: "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
@@ -143,7 +152,7 @@ app.put("/api/v1/content", userMiddleware, async (req, res) => {
             type,
             title,
             userId: req.userId,
-            tags,
+            tags: tags,
         })
 
         return res.status(200).json({
@@ -166,7 +175,7 @@ app.get("/api/v1/content", userMiddleware, async (req, res) => {
         })
 
         return res.status(200).json({
-            data: content,
+            content,
         })
     } catch(error) {
         return res.status(500).json({
