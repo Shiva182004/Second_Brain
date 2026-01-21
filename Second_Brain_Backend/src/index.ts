@@ -16,7 +16,8 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost:5173", // EXACT frontend URL
+    // origin: "http://localhost:5173", // EXACT frontend URL
+    origin: "https://second-brain.vercel.app",
     credentials: true
 }));
 const JWT_SECRET = "sdfjdslkfjdskfjdsklfjds";
@@ -126,8 +127,8 @@ app.post("/api/v1/signin", async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true, //for vercel deploy setting it to true for local its false
+            sameSite: "none", // set to none was lax
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
